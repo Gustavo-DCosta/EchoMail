@@ -1,7 +1,4 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
-package main
+package client
 
 import "github.com/Gustavo-DCosta/EchoPulse/client/cmd"
 

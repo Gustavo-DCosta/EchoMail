@@ -1,4 +1,4 @@
-# 🌙 EchoPulse  
+# 🌙 EchoMail  
 *A Lunaryx Studio Original*
 
 > *"We’re not just building software — we’re building shields for your thoughts."*
@@ -6,18 +6,18 @@
 ---
 
 ## 📜 Table of Contents  
-- [What is EchoPulse?](#-what-is-echopulse)
-- [Why?](#-why)
-- [Who’s it for?](#-whos-it-for)
-- [Who's behind this?](#-whos-behind-this)
-- [Status](#-status)
-- [Wanna Contribute?](#-wanna-contribute)
+- [🧠 What is EchoMail?](#-what-is-echomail)
+- [💥 Why?](#-why)
+- [🧪 Who’s it for?](#-whos-it-for)
+- [🐾 Who's behind this?](#-whos-behind-this)
+- [🚧 Status](#-status)
+- [🚀 Wanna Contribute?](#-wanna-contribute)
 
 ---
 
-## 🧠 What is EchoPulse?
+## 🧠 What is EchoMail?
 
-EchoPulse is a **CLI-native, end-to-end encrypted chat app** for devs, hackers, sysadmins, and rebels with a cause.  
+EchoMail is a **CLI-native, end-to-end encrypted chat app** for devs, hackers, sysadmins, and rebels with a cause.  
 Built with minimalism and **Golang zen** in mind, EchoPulse keeps things lightweight, fast, and deadly silent — no telemetry, no creepy tracking, no fluff.
 
 The server? Just a humble **message router**.  
@@ -30,7 +30,7 @@ It *can’t* read your messages — by design. The content is yours. Always.
 Because some of us dream of building startups instead of sleeping in shelters fighting **homeless Jhon** over the last bed.  
 Because privacy is not a feature — it’s a **right**.  
 Because “secure” shouldn’t mean bloated, ugly, or locked behind subscriptions.  
-Because we’re tired of being watched. Yeah **1984** was a warning, not a how-to manual.
+Because we’re tired of being watched. Yeah, **1984** was a warning, not a how-to manual.
 
 ---
 
@@ -51,7 +51,7 @@ If you can read a `man` page, EchoPulse speaks your language.
   <img src="content/Lunaryx.png" alt="Lunaryx Logo" width="150"/>
 </p>
 
-🌀 **Lunaryx Studio** – aka me, a one-man dev army on a mission to build cool sh*t and maybe not go broke doing it.  
+🌀 **Lunaryx Studio** — aka me, a one-man dev army on a mission to build cool sh*t and maybe not go broke doing it.  
 Lunaryx isn't a company. It's a **mindset**. A studio for ideas born from insomnia, ambition, and pure chaos.
 
 ---

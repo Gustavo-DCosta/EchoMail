@@ -1,7 +1,7 @@
 # 🌙 EchoMail  
 *A Lunaryx Studio Original*
 
-> *"We’re not just building software — we’re building shields for your thoughts."*
+> *"We’re not just building software -> we’re building shields for your thoughts."*
 
 ---
 
@@ -18,17 +18,17 @@
 ## What is EchoMail?
 
 EchoMail is a **CLI-native, end-to-end encrypted chat app** for devs, hackers, sysadmins, and rebels with a cause.  
-Built with minimalism and **Golang zen** in mind, EchoPulse keeps things lightweight, fast, and deadly silent — no telemetry, no creepy tracking, no fluff.
+Built with minimalism and **Golang zen** in mind, EchoPulse keeps things lightweight, fast, and deadly silent -< no telemetry, no creepy tracking, no fluff.
 
 The server? Just a humble **message router**.  
-It *can’t* read your messages — by design. The content is yours. Always.
+It *can’t* read your messages -> by design. The content is yours. Always.
 
 ---
 
 ## Why?
 
 Because some of us dream of building startups instead of sleeping in shelters fighting **homeless Jhon** over the last bed.  
-Because privacy is not a feature — it’s a **right**.  
+Because privacy is not a feature -> it’s a **right**.  
 Because “secure” shouldn’t mean bloated, ugly, or locked behind subscriptions.  
 Because we’re tired of being watched. Yeah, **1984** was a warning, not a how-to manual.
 
@@ -51,14 +51,14 @@ If you can read a `man` page, EchoPulse speaks your language.
   <img src="content/Lunaryx.png" alt="Lunaryx Logo" width="150"/>
 </p>
 
-**Lunaryx Studio** — aka me, a one-man dev army on a mission to build cool sh*t and maybe not go broke doing it.  
+**Lunaryx Studio** -> aka me, a one-man dev army on a mission to build cool sh*t and maybe not go broke doing it.  
 Lunaryx isn't a company. It's a **mindset**. A studio for ideas born from insomnia, ambition, and pure chaos.
 
 ---
 
 ## Status
 
-EchoPulse is in active development — early build, but already functional.  
+EchoPulse is in active development -> early build, but already functional.  
 We’re cooking plugins, themes, and even a local-only mode for total air-gap comms. 🔒
 
 ---
@@ -67,4 +67,4 @@ We’re cooking plugins, themes, and even a local-only mode for total air-gap co
 
 Got ideas? Want to test it? Found a bug? Want to throw some shade?  
 
-**Pull requests, issues, stars and memes — all welcome.** 💌
+**Pull requests, issues, stars and memes -> all welcome.** 💌

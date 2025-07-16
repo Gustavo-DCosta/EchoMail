@@ -5,7 +5,7 @@
 
 ---
 
-## 📜 Table of Contents  
+## Table of Contents  
 - [ What is EchoMail?](#-what-is-echomail)
 - [ Why?](#-why)
 - [ Who’s it for?](#-whos-it-for)
@@ -18,7 +18,7 @@
 ## What is EchoMail?
 
 EchoMail is a **CLI-native, end-to-end encrypted chat app** for devs, hackers, sysadmins, and rebels with a cause.  
-Built with minimalism and **Golang zen** in mind, EchoPulse keeps things lightweight, fast, and deadly silent -< no telemetry, no creepy tracking, no fluff.
+Built with minimalism and **Golang philosophy** in mind, EchoMail keeps things lightweight, fast, and deadly silent -> no telemetry, no creepy tracking, no fluff.
 
 The server? Just a humble **message router**.  
 It *can’t* read your messages -> by design. The content is yours. Always.
@@ -52,14 +52,14 @@ If you can read a `man` page, EchoPulse speaks your language.
 </p>
 
 **Lunaryx Studio** -> aka me, a one-man dev army on a mission to build cool sh*t and maybe not go broke doing it.  
-Lunaryx isn't a company. It's a **mindset**. A studio for ideas born from insomnia, ambition, and pure chaos.
+Lunaryx isn't a company. It's a **mindset**. A studio for ideas born from insomnia and ambition.
 
 ---
 
 ## Status
 
 EchoPulse is in active development -> early build, but already functional.  
-We’re cooking plugins, themes, and even a local-only mode for total air-gap comms. 🔒
+We’re cooking plugins, themes, and even a local-only mode for total air-gap comms. 
 
 ---
 
@@ -67,4 +67,4 @@ We’re cooking plugins, themes, and even a local-only mode for total air-gap co
 
 Got ideas? Want to test it? Found a bug? Want to throw some shade?  
 
-**Pull requests, issues, stars and memes -> all welcome.** 💌
+**Pull requests, issues, stars and memes -> all welcome.** 

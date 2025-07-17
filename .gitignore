@@ -1,3 +1,9 @@
+# Ignore folders INSIDE client/
+client/jwt/
+client/session/
+client/log/
+client/config/
+
 server/
 env
 inst_eng.exe

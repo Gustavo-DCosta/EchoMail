@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	go services.InstallationProcess()
+	go services.Launcher()
 }
 
 func main() {

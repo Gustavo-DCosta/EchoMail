@@ -33,8 +33,8 @@ func installationProcess() {
 		if err != nil {
 			fmt.Println("Error creating installation file")
 		}
-		defer file.Close()
 		writeInstallationState(InstallationLogPath)
+		defer file.Close()
 	}
 }
 
@@ -78,18 +78,20 @@ func checkInstallationFile(path string) bool { // We return if the file is there
 }
 
 func writeInstallationState(path string) {
-	file, err := os.OpenFile(path, os.O_WRONLY|os.O_TRUNC, 0644)
-	if err != nil {
-		fmt.Println("Err writting down the file", err)
-	}
-
 	state := InstallState{
 		State:       "success",
 		InstalledAt: time.Now().Format(time.RFC3339),
 		Version:     "1.0.0",
 	}
-	data, _ := json.MarshalIndent(state, "", " ")
-	_ = os.WriteFile("logs/installation.json", data, 0644)
 
-	defer file.Close()
+	data, err := json.MarshalIndent(state, "", " ")
+	if err != nil {
+		fmt.Println("Err marshaling state", err)
+		return
+	}
+
+	err = os.WriteFile(path, data, 0644)
+	if err != nil {
+		fmt.Println("Err writing installation file", err)
+	}
 }

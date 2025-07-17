@@ -23,8 +23,6 @@ func installationProcess() {
 	InstallationLogPath := "./log/installation.json"
 	if !areFoldersCreated() {
 		fmt.Println("Required folders were missing. Attempted to create them.")
-	} else {
-		fmt.Println("All required folders are present.")
 	}
 
 	if !checkInstallationFile(InstallationLogPath) {

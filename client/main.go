@@ -12,7 +12,7 @@ import (
 
 func init() {
 	go services.Launcher()
-	const col = 30
+	const col = 50
 
 	for i := 0; i <= col; i++ {
 		percent := (i * 100) / col

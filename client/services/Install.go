@@ -79,7 +79,7 @@ func writeInstallationState(path string) {
 	state := InstallState{
 		State:       "success",
 		InstalledAt: time.Now().Format(time.RFC3339),
-		Version:     "1.0.0",
+		Version:     "Engine version 0.1",
 	}
 
 	data, err := json.MarshalIndent(state, "", " ")

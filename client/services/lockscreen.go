@@ -61,7 +61,7 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 			fmt.Println("command to exit")
 			os.Exit(0)
 		case "help":
-			fmt.Println("I don't know man, I just created the app, what do you even need help for? The commands are literally infront of you")
+			StdOutHelp()
 		case "completion":
 			fmt.Println("Actually this command doesn't work, because he isn't supposed to be here, sorry not sorry muah")
 		default:

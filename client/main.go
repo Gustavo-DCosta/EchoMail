@@ -24,12 +24,13 @@ func init() {
 
 	// Clear screen after animation
 	time.Sleep(200 * time.Millisecond)
-	fmt.Print("\033[2J\033[H")
+	services.ClearUI()
 }
 
 func main() {
+	cmd.Execute()
+	services.ClearUI()
 	services.CenterAppName("[EchoMail]")
 	services.LockScreen()
-	cmd.Execute()
 	services.LockScreenUX()
 }

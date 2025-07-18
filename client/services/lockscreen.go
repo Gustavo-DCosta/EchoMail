@@ -54,12 +54,16 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 			// logic here
 
 		case "register":
-			fmt.Println("command to register")
+			RegisterLogic()
 			//logic here
 
 		case "exit":
 			fmt.Println("command to exit")
 			os.Exit(0)
+		case "help":
+			fmt.Println("I don't know man, I just created the app, what do you even need help for? The commands are literally infront of you")
+		case "completion":
+			fmt.Println("Actually this command doesn't work, because he isn't supposed to be here, sorry not sorry muah")
 		default:
 			fmt.Println("😺 Ayo captain Whiskers McGraw doesn't know that command!!")
 		}

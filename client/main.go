@@ -30,7 +30,7 @@ func init() {
 func main() {
 	cmd.Execute()
 	services.ClearUI()
-	services.CenterAppName("[EchoMail]")
+	services.CenterElement("[EchoMail]")
 	services.LockScreen()
 	services.LockScreenUX()
 }

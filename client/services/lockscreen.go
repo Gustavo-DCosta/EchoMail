@@ -10,21 +10,21 @@ import (
 	"golang.org/x/term"
 )
 
-func CenterAppName(AppName string) {
+func CenterElement(Text string) {
 	width, _, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		width = 80
 	}
 
-	txtLen := len(AppName)
+	txtLen := len(Text)
 
 	if txtLen >= width {
-		fmt.Println(AppName)
+		fmt.Println(Text)
 		return
 	}
 
 	padding := (width - txtLen) / 2
-	fmt.Println(strings.Repeat(" ", padding) + AppName)
+	fmt.Println(strings.Repeat(" ", padding) + Text)
 }
 
 func LockScreen() {
@@ -54,14 +54,15 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 			// logic here
 
 		case "register":
-			RegisterLogic()
-			//logic here
+			RegisterAccount()
 
 		case "exit":
 			fmt.Println("command to exit")
 			os.Exit(0)
 		case "help":
 			StdOutHelp()
+		case "clear":
+			ClearUI()
 		case "completion":
 			fmt.Println("Actually this command doesn't work, because he isn't supposed to be here, sorry not sorry muah")
 		default:

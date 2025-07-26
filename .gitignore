@@ -6,6 +6,7 @@ client/config/
 
 server/
 env
+otp.sh
 inst_eng.exe
 inst_eng.exe.obj
 inst_eng.pdb

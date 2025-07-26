@@ -9,5 +9,6 @@ func StdOutHelp() {
 	StdOutColor.Println(`
 	register		-command to create a new account
 	login 			-command to connect to an existent account
+	clear			-command to clear the screen
 	exit			-command to exit the app (why would you??)`)
 }

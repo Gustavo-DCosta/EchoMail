@@ -13,3 +13,7 @@ type VerifyOTPpayload struct {
 type UUIDResponse struct {
 	UUID string `json:"uuid"`
 }
+
+type VerifySupabaseResponse struct {
+	AccesToken string `json:"access_token"`
+}

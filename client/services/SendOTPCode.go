@@ -12,14 +12,14 @@ import (
 	"github.com/Gustavo-DCosta/EchoPulse/client/model"
 )
 
-type OTPResponse struct {
-	JWT     string `json:"jwt"`
-	Success bool   `json:"success"`
-	Error   string `json:"error,omitempty"`
-}
-
 func SendOTPcode(UUID string, token string) error {
 	url := os.Getenv("Verification_OTP_endpoint")
+
+	// Debug: Check URL
+	if url == "" {
+		return fmt.Errorf("Verification_OTP_endpoint not set")
+	}
+	fmt.Printf("Using URL: %s\n", url)
 
 	OTPdataPayload := model.VerifyOTPpayload{
 		UUID:  UUID,
@@ -31,6 +31,9 @@ func SendOTPcode(UUID string, token string) error {
 		fmt.Println("Error marshaling the data", err)
 		return err
 	}
+
+	// Debug: Show what we're sending
+	fmt.Printf("Sending: %s\n", string(jsonPayload))
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonPayload))
 	if err != nil {
@@ -53,34 +56,38 @@ func SendOTPcode(UUID string, token string) error {
 		return err
 	}
 
+	// Check for empty body BEFORE status check
+	if len(body) == 0 {
+		fmt.Println("WARNING: Response body is empty!")
+		return fmt.Errorf("server returned empty response")
+	}
+
 	if resp.StatusCode != http.StatusOK {
 		fmt.Printf("Error: received status code %d, body: %s\n", resp.StatusCode, string(body))
-		return fmt.Errorf("server returned status %d", resp.StatusCode)
+		return fmt.Errorf("server returned status %d: %s", resp.StatusCode, string(body))
 	}
 
-	// Parse the response
-	var otpResponse OTPResponse
+	// Try to parse JSON
+	var otpResponse model.VerifySupabaseResponse
 	err = json.Unmarshal(body, &otpResponse)
 	if err != nil {
-		fmt.Println("Error unmarshaling response:", err)
-		return err
-	}
+		fmt.Printf("JSON Unmarshal Error: %v\n", err)
+		fmt.Printf("Trying to parse: '%s'\n", string(body))
 
-	if !otpResponse.Success {
-		return fmt.Errorf("OTP verification failed: %s", otpResponse.Error)
-	}
+		// Let's try to see if it's valid JSON at all
+		var raw interface{}
+		if json.Unmarshal(body, &raw) != nil {
+			fmt.Println("Response is not valid JSON at all!")
+		} else {
+			fmt.Printf("Response is valid JSON but doesn't match our struct: %+v\n", raw)
+		}
 
-	// Create jwt directory if it doesn't exist
-	jwtDir := "./jwt"
-	err = os.MkdirAll(jwtDir, 0755)
-	if err != nil {
-		fmt.Println("Error creating jwt directory:", err)
-		return err
+		return fmt.Errorf("failed to parse response: %w", err)
 	}
 
 	// Save JWT to file
-	jwtPath := filepath.Join(jwtDir, "token.jwt")
-	err = os.WriteFile(jwtPath, []byte(otpResponse.JWT), 0644)
+	jwtPath := filepath.Join("./jwt", "token.json")
+	err = os.WriteFile(jwtPath, []byte(otpResponse.AccesToken), 0644)
 	if err != nil {
 		fmt.Println("Error saving JWT to file:", err)
 		return err

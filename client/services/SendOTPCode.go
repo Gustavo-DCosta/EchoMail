@@ -68,7 +68,7 @@ func SendOTPcode(UUID string, token string) error {
 	}
 
 	// Try to parse JSON
-	var otpResponse model.VerifySupabaseResponse
+	var otpResponse string
 	err = json.Unmarshal(body, &otpResponse)
 	if err != nil {
 		fmt.Printf("JSON Unmarshal Error: %v\n", err)
@@ -87,7 +87,7 @@ func SendOTPcode(UUID string, token string) error {
 
 	// Save JWT to file
 	jwtPath := filepath.Join("./jwt", "token.json")
-	err = os.WriteFile(jwtPath, []byte(otpResponse.AccesToken), 0644)
+	err = os.WriteFile(jwtPath, []byte(otpResponse), 0644)
 	if err != nil {
 		fmt.Println("Error saving JWT to file:", err)
 		return err

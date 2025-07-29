@@ -15,5 +15,5 @@ type UUIDResponse struct {
 }
 
 type VerifySupabaseResponse struct {
-	AccesToken string `json:"access_token"`
+	AccessToken string `json:"access_token"`
 }

@@ -15,9 +15,9 @@ func RegisterAccount() {
 
 	err = SendOTPcode(uuid, Token)
 	if err != nil {
-		fmt.Println("Couldn't send otp code to the server")
+		fmt.Println("Couldn't create your account: ", err)
 		return
 	} else {
-		fmt.Println("You succesfully creates an account")
+		AppUnlocked(EmailAddress)
 	}
 }

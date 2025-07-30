@@ -10,7 +10,7 @@ import (
 	"golang.org/x/term"
 )
 
-func CenterElement(Text string) {
+func CenterElement(Text string, param2 bool) {
 	width, _, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		width = 80
@@ -24,7 +24,11 @@ func CenterElement(Text string) {
 	}
 
 	padding := (width - txtLen) / 2
-	fmt.Println(strings.Repeat(" ", padding) + Text)
+	if param2 == true {
+		color.RGB(122, 77, 89).Print(strings.Repeat(" ", padding) + Text)
+	} else {
+		fmt.Println(strings.Repeat(" ", padding) + Text)
+	}
 }
 
 func LockScreen() {
@@ -50,12 +54,9 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 
 		switch input {
 		case "login":
-			LoginLogic()
-			// logic here
-
+			Login()
 		case "register":
 			RegisterAccount()
-
 		case "exit":
 			fmt.Println("command to exit")
 			os.Exit(0)

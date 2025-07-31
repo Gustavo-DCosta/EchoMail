@@ -17,3 +17,7 @@ type UUIDResponse struct {
 type VerifySupabaseResponse struct {
 	AccessToken string `json:"access_token"`
 }
+
+type LoginPayload struct {
+	StructPhoneNumber string `json:"phone_number"`
+}

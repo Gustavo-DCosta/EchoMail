@@ -14,4 +14,4 @@ require (
 	golang.org/x/term v0.33.0 // direct
 )
 
-require github.com/joho/godotenv v1.5.1 // indirect
+require github.com/joho/godotenv v1.5.1 // direct

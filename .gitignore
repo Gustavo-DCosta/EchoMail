@@ -11,3 +11,4 @@ inst_eng.exe
 inst_eng.exe.obj
 inst_eng.pdb
 test.sh
+debug.sh

@@ -20,8 +20,9 @@ func SendRegisterCredentials(PhoneNumber string, EmailAddress string) (string, e
 	}
 
 	RequestCredentials := model.SignupRequest{
-		Phone_Number:  PhoneNumber,
-		Email_Address: EmailAddress,
+		StructPhone:     PhoneNumber,
+		StructEmaill:    EmailAddress,
+		StructAccStatus: true,
 	}
 
 	jsonRequestCredentials, err := json.Marshal(RequestCredentials)

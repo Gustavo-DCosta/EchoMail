@@ -54,9 +54,9 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 
 		switch input {
 		case "login":
-			Login()
+			ConnHandler(false)
 		case "register":
-			RegisterAccount()
+			ConnHandler(true)
 		case "exit":
 			fmt.Println("command to exit")
 			os.Exit(0)

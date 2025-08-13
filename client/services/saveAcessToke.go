@@ -36,7 +36,7 @@ func SaveAccessToken(accessToken string) error {
 		return fmt.Errorf("failed to write file: %w", err)
 	}
 
-	fmt.Println("✅ Token saved to", path)
+	fmt.Println("✅ Token saved to\n", path)
 	return nil
 }
 

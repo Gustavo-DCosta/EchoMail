@@ -20,5 +20,4 @@ func ConnHandler(accountStatus bool) {
 	}
 	go RunSaveJWT(accessToken)
 	AppUnlocked(emailAddress)
-	return
 }

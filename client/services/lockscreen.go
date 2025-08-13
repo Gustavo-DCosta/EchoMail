@@ -66,6 +66,8 @@ func LockScreenUX() { // I didn't knew what to call this function if someone has
 			ClearUI()
 		case "completion":
 			fmt.Println("Actually this command doesn't work, because he isn't supposed to be here, sorry not sorry muah")
+		case "guest":
+			AppUnlocked("guest")
 		default:
 			fmt.Println("😺 Ayo captain Whiskers McGraw doesn't know that command!!")
 		}

@@ -12,3 +12,12 @@ func StdOutHelp() {
 	clear			-command to clear the screen
 	exit			-command to exit the app (why would you??)`)
 }
+
+func StdOutInterHelp() {
+	StdOutColor := color.RGB(239, 207, 167)
+	StdOutColor.Println(`
+	send @user
+	exit
+	clear	
+	`)
+}

@@ -10,6 +10,7 @@ import (
 )
 
 func GetCredentials() (string, string) {
+	stdErr := color.RGB(255, 0, 0)
 	stdOutCred := color.RGB(204, 190, 214)
 
 	stdOutCred.Print("Display name (for [name<>echomail.dev]): ")
@@ -22,6 +23,9 @@ func GetCredentials() (string, string) {
 	}
 
 	name := strings.TrimSpace(input)
+	if name == "" {
+		stdErr.Print("Please insert a name (for [name<>echomail.dev])")
+	}
 
 	EmailAdress := name + "<>echomail.dev"
 
@@ -35,6 +39,9 @@ func GetCredentials() (string, string) {
 	}
 
 	phoneNumber := strings.TrimSpace(input)
+	if phoneNumber == "" {
+		stdErr.Print("Please insert a name (for [name<>echomail.dev])")
+	}
 
 	return phoneNumber, EmailAdress
 }

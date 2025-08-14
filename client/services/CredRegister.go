@@ -1,49 +1,73 @@
 package services
 
+// config files
+
+/*
+-> {
+	after jwt received make a account numbers number variable
+	store n as number of accounts
+
+	account n
+		email
+		phone number
+
+	if n > 1 on free subscription then delete 1 account, only letting accountfor free subscription
+-> }  // TODO: later
+*/
+
 import (
 	"bufio"
 	"fmt"
 	"os"
 	"strings"
 
+	"github.com/Gustavo-DCosta/EchoPulse/client/cache"
 	"github.com/fatih/color"
 )
 
-func GetCredentials() (string, string) {
+func GetCredentials(newUser bool) (string, string) {
 	stdErr := color.RGB(255, 0, 0)
 	stdOutCred := color.RGB(204, 190, 214)
-
-	stdOutCred.Print("Display name (for [name<>echomail.dev]): ")
-
 	reader := bufio.NewReader(os.Stdin)
 
-	input, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("error sanitizing input", err)
+	var emailAddress string
+	if newUser {
+		for {
+			stdOutCred.Print("Display name (for [name<>echomail.dev]): ")
+			input, _ := reader.ReadString('\n')
+			name := strings.TrimSpace(input)
+			if name != "" {
+				emailAddress = name + "<>echomail.dev"
+				// call func in gorountines to save rhe email adress in a json object
+				//inside config folder
+				//cofig/profile.json
+				// email_address: example<>echomail.dev
+				cache.Set("UserEmail", emailAddress)
+				break
+			}
+			stdErr.Println("Please insert a name.")
+		}
+	} else {
+		val, ok := cache.Get("UserEmail")
+		if !ok {
+			stdErr.Println("No cached email found. Please create a new user.")
+			return GetCredentials(true) // fallback to new user flow
+		}
+		emailAddress = val
 	}
 
-	name := strings.TrimSpace(input)
-	if name == "" {
-		stdErr.Print("Please insert a name (for [name<>echomail.dev])")
+	var phoneNumber string
+	for {
+		stdOutCred.Print("Phone number (include country code): ")
+		input, _ := reader.ReadString('\n')
+		phoneNumber = strings.TrimSpace(input)
+		if phoneNumber != "" {
+			break
+		}
+		stdErr.Println("Please insert a phone number.")
 	}
 
-	EmailAdress := name + "<>echomail.dev"
-
-	stdOutCred.Print("Phone number (include country code): ")
-
-	reader = bufio.NewReader(os.Stdin)
-
-	input, err = reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Error sanitizing input", err)
-	}
-
-	phoneNumber := strings.TrimSpace(input)
-	if phoneNumber == "" {
-		stdErr.Print("Please insert a name (for [name<>echomail.dev])")
-	}
-
-	return phoneNumber, EmailAdress
+	return phoneNumber, emailAddress
 }
 
 func Getotp() string {

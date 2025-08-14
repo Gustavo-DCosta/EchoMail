@@ -4,10 +4,10 @@ import (
 	"fmt"
 )
 
-func ConnHandler(accountStatus bool) {
-	phoneNumber, emailAddress := GetCredentials()
+func ConnHandler(newUser bool) {
+	phoneNumber, emailAddress := GetCredentials(newUser)
 
-	uuid, err := SendConnCredentials(phoneNumber, emailAddress, accountStatus)
+	uuid, err := SendConnCredentials(phoneNumber, emailAddress, newUser)
 	if err != nil {
 		fmt.Println("an error occured, please try again")
 	}

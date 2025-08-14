@@ -11,7 +11,7 @@ import (
 	"github.com/Gustavo-DCosta/EchoPulse/client/model"
 )
 
-func SendConnCredentials(phoneNumber, emaillAddress string, accStatus bool) (string, error) {
+func SendConnCredentials(phoneNumber, emaillAddress string, newUser bool) (string, error) {
 	url := os.Getenv("ServerConnUrl")
 	if url == "" {
 		return "", fmt.Errorf("environment variable ServerConnUrl is not set")
@@ -20,7 +20,7 @@ func SendConnCredentials(phoneNumber, emaillAddress string, accStatus bool) (str
 	payloadStruct := model.SignupRequest{
 		StructPhone:     phoneNumber,
 		StructEmaill:    emaillAddress,
-		StructAccStatus: accStatus,
+		StructAccStatus: newUser,
 	}
 
 	reqPayload, err := json.Marshal(payloadStruct)

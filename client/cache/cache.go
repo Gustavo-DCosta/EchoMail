@@ -6,7 +6,7 @@ package cache
 import "sync"
 
 var Cache = struct {
-	sync.Mutex
+	sync.RWMutex
 	data map[string]string
 }{
 	data: make(map[string]string),
@@ -19,8 +19,8 @@ func Set(key, value string) {
 }
 
 func Get(key string) (string, bool) {
-	Cache.Lock()
-	defer Cache.Unlock()
+	Cache.RLock()
+	defer Cache.RUnlock()
 	val, ok := Cache.data[key]
 	return val, ok
 }

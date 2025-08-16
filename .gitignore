@@ -12,3 +12,4 @@ inst_eng.exe.obj
 inst_eng.pdb
 test.sh
 debug.sh
+verifyotp.sh

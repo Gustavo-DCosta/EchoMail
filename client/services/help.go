@@ -16,8 +16,10 @@ func StdOutHelp() {
 func StdOutInterHelp() {
 	StdOutColor := color.RGB(239, 207, 167)
 	StdOutColor.Println(`
-	send @user
-	exit
-	clear	
+	send 			-command to send a message
+	exit			-command to exit the app		
+	clear			-command to clear the screen
+	esc				-command to return to lockscreen
+	guest			-command to bypass authentification
 	`)
 }

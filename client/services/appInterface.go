@@ -38,7 +38,7 @@ func IOParser() {
 		cmdInput := scanner.Text()
 
 		switch cmdInput {
-		case "send @user":
+		case "send":
 			MsgWS()
 		case "help":
 			StdOutInterHelp()
@@ -46,6 +46,10 @@ func IOParser() {
 			os.Exit(1)
 		case "clear":
 			ClearUI()
+		case "esc":
+			fmt.Println("Going back to lockscreen...")
+			CenterElement("[EchoMail]", false)
+			LockScreenUX()
 		default:
 			fmt.Println("😺 Ayo captain Whiskers McGraw doesn't know that command!!")
 		}

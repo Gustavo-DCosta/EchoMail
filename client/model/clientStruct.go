@@ -21,5 +21,5 @@ type VerifySupabaseResponse struct {
 }
 
 type AccessTkJsonObject struct {
-	StructAccessTk string
+	StructAccessTk string `json:"access_token"`
 }

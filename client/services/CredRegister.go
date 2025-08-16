@@ -82,7 +82,9 @@ func Getotp() string {
 	stdOutToken.Print("Please insert the code received on your phone: ")
 	input, err := reader.ReadString('\n')
 	if err != nil {
+		Check(err)
 		fmt.Println("error sanitizing input", err)
+		return ""
 	}
 	input = strings.TrimSpace(input)
 
@@ -92,6 +94,7 @@ func Getotp() string {
 			stdOutToken.Print("Please insert the code received on your phone: ")
 			input, err = reader.ReadString('\n')
 			if err != nil {
+				Check(err)
 				fmt.Println("error sanitizing input", err)
 				continue
 			}

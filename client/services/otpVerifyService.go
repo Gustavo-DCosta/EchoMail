@@ -14,7 +14,7 @@ import (
 func SendOtp(uuid, token string) (string, error) {
 	url := os.Getenv("ServerVerificationUrl")
 	if url == "" {
-		return "", fmt.Errorf("environment variable ServerConnUrl is not set")
+		return "", fmt.Errorf("environment variable ServerVerificationUrl is not set")
 	}
 
 	payloadStruct := model.VerifyOTPrequest{
@@ -29,14 +29,18 @@ func SendOtp(uuid, token string) (string, error) {
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(reqPayload))
+	if err != nil {
+		fmt.Println("Error creating HTTP request:", err)
+		return "", err
+	}
 
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println("Error sending the request")
-		return "", nil
+		fmt.Println("Error sending the request:", err)
+		return "", err // Return the actual error
 	}
 	defer resp.Body.Close()
 
@@ -45,16 +49,21 @@ func SendOtp(uuid, token string) (string, error) {
 	}
 
 	var serverResponse model.VerifySupabaseResponse
+	fmt.Println("Server HTTP status:", resp.StatusCode)
+
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Couldn't read the response body | ERROR:", err)
 		return "", err
 	}
+
+	fmt.Println("Raw response from server:", string(bodyBytes))
 
 	if err := json.Unmarshal(bodyBytes, &serverResponse); err != nil {
 		fmt.Println("Couldn't unmarshal the uuid response | ERROR:", err)
 		return "", err
 	}
+
+	fmt.Println("DEBUG:	", serverResponse.StructAccessToken)
 
 	return serverResponse.StructAccessToken, nil
 }

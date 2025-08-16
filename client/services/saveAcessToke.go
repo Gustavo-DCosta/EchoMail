@@ -28,6 +28,7 @@ func SaveAccessToken(accessToken string) error {
 	// Marshal into JSON
 	jsonData, err := json.MarshalIndent(tokenObj, "", "  ")
 	if err != nil {
+		Check(err)
 		return fmt.Errorf("failed to marshal JSON: %w", err)
 	}
 
@@ -42,6 +43,7 @@ func SaveAccessToken(accessToken string) error {
 
 func RunSaveJWT(acessToken string) {
 	if err := SaveAccessToken(acessToken); err != nil {
+		Check(err)
 		fmt.Println("Couldn't save the jwt | ERROR: ", err)
 	}
 }

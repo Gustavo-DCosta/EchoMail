@@ -17,7 +17,9 @@ func GetSMScode() string {
 
 	input, err := reader.ReadString('\n')
 	if err != nil {
+		Check(err)
 		fmt.Println("Error sanitizing the input", err)
+		return ""
 	}
 
 	if input == "" {

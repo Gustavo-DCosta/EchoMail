@@ -32,7 +32,7 @@ func IOParser() {
 		err := scanner.Err()
 
 		if err != nil {
-			fmt.Println("Error starting parser: ", err)
+			Check(err)
 		}
 
 		cmdInput := scanner.Text()

@@ -24,12 +24,14 @@ func SendOtp(uuid, token string) (string, error) {
 
 	reqPayload, err := json.Marshal(payloadStruct)
 	if err != nil {
+		Check(err)
 		fmt.Println("Couldn't marshal the payload | ERROR :", err)
 		return "", err
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(reqPayload))
 	if err != nil {
+		Check(err)
 		fmt.Println("Error creating HTTP request:", err)
 		return "", err
 	}
@@ -39,6 +41,7 @@ func SendOtp(uuid, token string) (string, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
+		Check(err)
 		fmt.Println("Error sending the request:", err)
 		return "", err // Return the actual error
 	}
@@ -53,6 +56,7 @@ func SendOtp(uuid, token string) (string, error) {
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
+		Check(err)
 		return "", err
 	}
 

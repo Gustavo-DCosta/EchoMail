@@ -13,6 +13,7 @@ import (
 func CenterElement(Text string, param2 bool) {
 	width, _, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
+		Check(err)
 		width = 80
 	}
 

@@ -48,6 +48,7 @@ func areFoldersCreated() bool {
 			fmt.Printf("📁Folder missing: %s\n", fullPath)
 			err := os.MkdirAll(fullPath, 0755)
 			if err != nil {
+				Check(err)
 				fmt.Printf("Problem creating folder %s: %v\n", fullPath, err)
 				os.Exit(1)
 			}
@@ -67,6 +68,7 @@ func checkInstallationFile(path string) bool { // We return if the file is there
 	var fileState bool
 	_, err := os.Stat(path)
 	if err == nil {
+		Check(err)
 		fileState = true
 	} else {
 		fileState = false
@@ -84,12 +86,15 @@ func writeInstallationState(path string) {
 
 	data, err := json.MarshalIndent(state, "", " ")
 	if err != nil {
+		Check(err)
 		fmt.Println("Err marshaling state", err)
 		return
 	}
 
 	err = os.WriteFile(path, data, 0644)
 	if err != nil {
+		Check(err)
 		fmt.Println("Err writing installation file", err)
+		return
 	}
 }

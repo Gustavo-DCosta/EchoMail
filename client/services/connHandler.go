@@ -10,6 +10,7 @@ func ConnHandler(newUser bool) {
 	uuid, err := SendConnCredentials(phoneNumber, emailAddress, newUser)
 	if err != nil {
 		fmt.Println("an error occured, please try again", err)
+		Check(err)
 		return
 	}
 
@@ -18,6 +19,7 @@ func ConnHandler(newUser bool) {
 	accessToken, err := SendOtp(uuid, token)
 	if err != nil {
 		fmt.Println("an error occured, please try again", err)
+		Check(err)
 		return
 	}
 	go RunSaveJWT(accessToken)

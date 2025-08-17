@@ -21,7 +21,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Gustavo-DCosta/EchoPulse/client/cache"
+	"github.com/Gustavo-DCosta/EchoMail/client/cache"
 	"github.com/fatih/color"
 )
 
@@ -38,9 +38,10 @@ func GetCredentials(newUser bool) (string, string) {
 			name := strings.TrimSpace(input)
 			if name != "" {
 				emailAddress = name + "<>echomail.dev"
+				go saveEmaillAdr(emailAddress)
 				// call func in gorountines to save rhe email adress in a json object
-				//inside config folder
-				//cofig/profile.json
+				// inside config folder
+				// cofig/profile.json
 				// email_address: example<>echomail.dev
 				cache.Set("UserEmail", emailAddress)
 				break
@@ -96,7 +97,8 @@ func Getotp() string {
 			if err != nil {
 				Check(err)
 				fmt.Println("error sanitizing input", err)
-				continue
+				return "" // return if it isn't possible to read the input
+
 			}
 			input = strings.TrimSpace(input)
 			if len(input) == max {

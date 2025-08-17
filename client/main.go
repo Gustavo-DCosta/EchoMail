@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Gustavo-DCosta/EchoPulse/client/cmd"
-	"github.com/Gustavo-DCosta/EchoPulse/client/services"
+	"github.com/Gustavo-DCosta/EchoMail/client/cmd"
+	"github.com/Gustavo-DCosta/EchoMail/client/services"
 	"github.com/joho/godotenv"
 )
 

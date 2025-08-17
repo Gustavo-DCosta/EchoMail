@@ -1,4 +1,4 @@
-module github.com/Gustavo-DCosta/EchoPulse/client
+module github.com/Gustavo-DCosta/EchoMail/client
 
 go 1.24.3
 

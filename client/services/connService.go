@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Gustavo-DCosta/EchoPulse/client/model"
+	"github.com/Gustavo-DCosta/EchoMail/client/model"
 )
 
 func SendConnCredentials(phoneNumber, emaillAddress string, newUser bool) (string, error) {

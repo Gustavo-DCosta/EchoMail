@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Gustavo-DCosta/EchoPulse/client/model"
+	"github.com/Gustavo-DCosta/EchoMail/client/model"
 )
 
 func Check(e error) {

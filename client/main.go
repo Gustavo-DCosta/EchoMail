@@ -23,6 +23,7 @@ func init() {
 
 func init() {
 	go services.Launcher()
+	go services.CacheEmailfromFile()
 	const col = 50
 
 	for i := 0; i <= col; i++ {

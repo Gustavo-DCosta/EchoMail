@@ -10,7 +10,9 @@ func StdOutHelp() {
 	register		-command to create a new account
 	login 			-command to connect to an existent account
 	clear			-command to clear the screen
-	exit			-command to exit the app (why would you??)`)
+	exit			-command to exit the app (why would you??)
+
+	`)
 }
 
 func StdOutInterHelp() {
@@ -21,5 +23,6 @@ func StdOutInterHelp() {
 	clear			-command to clear the screen
 	esc				-command to return to lockscreen
 	guest			-command to bypass authentification
+
 	`)
 }

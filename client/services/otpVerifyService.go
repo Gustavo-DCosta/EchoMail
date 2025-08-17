@@ -60,8 +60,6 @@ func SendOtp(uuid, token string) (string, error) {
 		return "", err
 	}
 
-	fmt.Println("Raw response from server:", string(bodyBytes))
-
 	if err := json.Unmarshal(bodyBytes, &serverResponse); err != nil {
 		fmt.Println("Couldn't unmarshal the uuid response | ERROR:", err)
 		return "", err

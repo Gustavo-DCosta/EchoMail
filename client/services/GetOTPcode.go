@@ -10,8 +10,8 @@ import (
 )
 
 func GetSMScode() string {
-	StdOutOTPcode := color.RGB(149, 177, 219)
-	StdOutOTPcode.Print("Please input the code received on your phone: ")
+	stdOutOTPcode := color.RGB(149, 177, 219)
+	stdOutOTPcode.Print("Please input the code received on your phone: ")
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -23,7 +23,9 @@ func GetSMScode() string {
 	}
 
 	if input == "" {
-		StdOutOTPcode.Print("Code was not saved, please rewrite it: ")
+		stdOutOTPcode.Print("The code seems empty Whiskers McGraw doesn't aprove it\n")
+		stdOutOTPcode.Print("Please wirte it again:	")
+		InfoLogs("There was a problem to receive the OTP from user input")
 	}
 
 	OTPcode := strings.TrimSpace(input)

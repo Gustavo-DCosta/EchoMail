@@ -44,3 +44,26 @@ func Check(e error) {
 		fmt.Println("Couldn't write to logs file |ERROR|", err)
 	}
 }
+
+func InfoLogs(message string) {
+	path := "log/log.json"
+
+	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println("Failed to open the file |ERROR|", err)
+		return
+	}
+	defer file.Close()
+
+	entry := model.LogsObject{
+		StructTimeStamp: time.Now(),
+		StructMessage:   message,
+	}
+
+	encoder := json.NewEncoder(file)
+	encoder.SetEscapeHTML(false)
+
+	if err := encoder.Encode(entry); err != nil {
+		fmt.Println("Failed to decode the message |ERROR|", err)
+	}
+}

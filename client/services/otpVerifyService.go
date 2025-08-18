@@ -46,6 +46,7 @@ func SendOtp(uuid, token string) (string, error) {
 		return "", err // Return the actual error
 	}
 	defer resp.Body.Close()
+	InfoLogs("Sent an http request to the server")
 
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("unexpected HTTP status: %d %s", resp.StatusCode, resp.Status)
@@ -53,6 +54,7 @@ func SendOtp(uuid, token string) (string, error) {
 
 	var serverResponse model.VerifySupabaseResponse
 	fmt.Println("Server HTTP status:", resp.StatusCode)
+	InfoLogs("Rceived response from the server")
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {

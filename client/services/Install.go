@@ -97,4 +97,5 @@ func writeInstallationState(path string) {
 		fmt.Println("Err writing installation file", err)
 		return
 	}
+	InfoLogs("Sucessfully wrote version of the app")
 }

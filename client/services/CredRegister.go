@@ -67,6 +67,7 @@ func GetCredentials(newUser bool) (string, string) {
 		}
 		stdErr.Println("Please insert a phone number.")
 	}
+	InfoLogs("Sucessfully received credentials")
 
 	return phoneNumber, emailAddress
 }
@@ -110,5 +111,6 @@ func Getotp() string {
 		token = input
 	}
 
+	InfoLogs("Sucessfully received OTP token")
 	return token
 }

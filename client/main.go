@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Gustavo-DCosta/EchoMail/client/cmd"
 	"github.com/Gustavo-DCosta/EchoMail/client/services"
 	"github.com/joho/godotenv"
 )
@@ -40,7 +39,6 @@ func init() {
 }
 
 func main() {
-	cmd.Execute()
 	services.ClearUI()
 	services.CenterElement("[EchoMail]", false)
 	services.LockScreen()

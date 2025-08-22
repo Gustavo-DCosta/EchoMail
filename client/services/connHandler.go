@@ -6,6 +6,9 @@ import (
 
 func ConnHandler(newUser bool) {
 	phoneNumber, emailAddress := GetCredentials(newUser)
+	if phoneNumber == "" || emailAddress == "" {
+		return
+	}
 
 	uuid, err := SendConnCredentials(phoneNumber, emailAddress, newUser)
 	if err != nil {

@@ -26,28 +26,38 @@ import (
 )
 
 func GetCredentials(newUser bool) (string, string) {
-	stdErr := color.RGB(255, 0, 0)
+	ilegalChars := []rune{
+		' ', '!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '/', '\\', ';', ':', '\'', '"', '<', '>', '?', '[', ']', '{', '}', '|', '`', '~', '§',
+	}
+	stdErr := color.RGB(244, 136, 134)
 	stdOutCred := color.RGB(204, 190, 214)
 	reader := bufio.NewReader(os.Stdin)
 
 	var emailAddress string
 	if newUser {
-		for {
-			stdOutCred.Print("Display name (for [name<>echomail.dev]): ")
-			input, _ := reader.ReadString('\n')
-			name := strings.TrimSpace(input)
-			if name != "" {
-				emailAddress = name + "<>echomail.dev"
-				go saveEmaillAdr(emailAddress)
-				// call func in gorountines to save rhe email adress in a json object
-				// inside config folder
-				// cofig/profile.json
-				// email_address: example<>echomail.dev
-				cache.Set("UserEmail", emailAddress)
-				break
-			}
-			stdErr.Println("Please insert a name.")
+		stdOutCred.Print("Display name (for [name<>echomail.dev]): ")
+		input, _ := reader.ReadString('\n')
+		name := strings.TrimSpace(input)
+
+		// Basic length/format check
+		if name == "" || len(name) < 3 || len(name) > 15 || name[0] == '.' {
+			stdErr.Println("Please insert a valid name.")
+			return "", "" // return to outer command loop
 		}
+
+		// Illegal character check
+		for _, c := range name {
+			for _, ilegal := range ilegalChars {
+				if c == ilegal {
+					stdErr.Println("Found illegal characters in your name. Please try again:", string(c))
+					return "", "" // return to outer command loop
+				}
+			}
+		}
+
+		emailAddress = name + "<>echomail.dev"
+		go saveEmaillAdr(emailAddress)
+		cache.Set("UserEmail", emailAddress)
 	} else {
 		val, ok := cache.Get("UserEmail")
 		if !ok {
@@ -67,8 +77,8 @@ func GetCredentials(newUser bool) (string, string) {
 		}
 		stdErr.Println("Please insert a phone number.")
 	}
-	InfoLogs("Sucessfully received credentials")
 
+	InfoLogs("Successfully received credentials")
 	return phoneNumber, emailAddress
 }
 

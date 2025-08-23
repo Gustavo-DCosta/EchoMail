@@ -41,7 +41,7 @@ Because we’re tired of being watched. Yeah, **1984** was a warning, not a how-
 - 🛠️ **Sysadmins** and **DevOps warriors** tired of Slack and spying SaaS  
 - 🖥️ Anyone who vibes with a terminal and wants their convos to stay *theirs*
 
-If you can read a `man` page, EchoPulse speaks your language.
+If you can read a `man` page, EchoMail speaks your language.
 
 ---
 

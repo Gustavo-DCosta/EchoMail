@@ -67,7 +67,7 @@ func SendOtp(uuid, token string) (string, error) {
 		return "", err
 	}
 
-	fmt.Println("DEBUG:	", serverResponse.StructAccessToken)
+	//deleted debug message
 
 	return serverResponse.StructAccessToken, nil
 }

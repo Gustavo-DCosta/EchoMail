@@ -33,6 +33,9 @@ func IOParser() {
 
 		if err != nil {
 			Check(err)
+			fmt.Println("Sorry something went wrong") // Letting the user know that it failed
+			// Can't read input so should leave
+			return // swapped os.Exit(1) by returning to the last function
 		}
 
 		cmdInput := scanner.Text()
@@ -43,7 +46,8 @@ func IOParser() {
 		case "help":
 			StdOutInterHelp()
 		case "exit":
-			os.Exit(1)
+			os.Exit(0)
+			// fixed exit status
 		case "clear":
 			ClearUI()
 		case "esc":

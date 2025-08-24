@@ -52,8 +52,7 @@ func SendOtp(uuid, token string) (string, error) {
 		return "", fmt.Errorf("unexpected HTTP status: %d %s", resp.StatusCode, resp.Status)
 	}
 
-	var serverResponse model.VerifySupabaseResponse
-	fmt.Println("Server HTTP status:", resp.StatusCode)
+	var serverResponse model.VerifySupabaseResponse // removed debug message, UX upgrade
 	InfoLogs("Rceived response from the server")
 
 	bodyBytes, err := io.ReadAll(resp.Body)

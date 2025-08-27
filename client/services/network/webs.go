@@ -1,4 +1,4 @@
-package services
+package network
 
 import (
 	"github.com/fatih/color"

@@ -1,25 +1,17 @@
-package services
+package core
 
 import (
 	"bufio"
 	"fmt"
 	"os"
 
-	"github.com/fatih/color"
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
+	"github.com/Gustavo-DCosta/EchoMail/client/services/shared"
 )
 
-func HelpCommand() {
-	fmt.Print("Enter ")
-	color.RGB(224, 166, 31).Print("command")
-	fmt.Print(" (")
-	color.RGB(96, 168, 74).Print("'help' ")
-	color.RGB(92, 132, 232).Print(" for ")
-	fmt.Print(" options): \n")
-}
-
 func AppUnlocked(EmailAddress string) {
-	CenterElement("Welcome "+EmailAddress+"\n", true)
-	HelpCommand()
+	shared.CenterElement("Welcome "+EmailAddress+"\n", true)
+	shared.HelpCommand()
 	IOParser()
 }
 
@@ -32,7 +24,7 @@ func IOParser() {
 		err := scanner.Err()
 
 		if err != nil {
-			Check(err)
+			inoutput.Check(err)
 			fmt.Println("Sorry something went wrong") // Letting the user know that it failed
 			// Can't read input so should leave
 			return // swapped os.Exit(1) by returning to the last function
@@ -42,18 +34,19 @@ func IOParser() {
 
 		switch cmdInput {
 		case "send":
-			MsgWS()
+			//MsgWS()
+			fmt.Println("yo")
 		case "help":
-			StdOutInterHelp()
+			shared.StdOutInterHelp()
 		case "exit":
 			os.Exit(0)
 			// fixed exit status
 		case "clear":
-			ClearUI()
+			shared.ClearUI()
 		case "esc":
 			fmt.Println("Going back to lockscreen...")
-			CenterElement("[EchoMail]", false)
-			LockScreenUX()
+			shared.CenterElement("[EchoMail]", false)
+			LockScreenPrompt()
 		default:
 			fmt.Println("😺 Ayo captain Whiskers McGraw doesn't know that command!!")
 		}

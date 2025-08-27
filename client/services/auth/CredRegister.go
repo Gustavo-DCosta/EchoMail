@@ -1,4 +1,4 @@
-package services
+package auth
 
 // config files
 
@@ -22,6 +22,7 @@ import (
 	"strings"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/cache"
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
 	"github.com/fatih/color"
 )
 
@@ -56,7 +57,7 @@ func GetCredentials(newUser bool) (string, string) {
 		}
 
 		emailAddress = name + "<>echomail.dev"
-		go saveEmaillAdr(emailAddress)
+		//go inoutput.saveEmaillAdr(emailAddress)
 		cache.Set("UserEmail", emailAddress)
 	} else {
 		val, ok := cache.Get("UserEmail")
@@ -78,7 +79,7 @@ func GetCredentials(newUser bool) (string, string) {
 		stdErr.Println("Please insert a phone number.")
 	}
 
-	InfoLogs("Successfully received credentials")
+	inoutput.InfoLogs("Successfully received credentials")
 	return phoneNumber, emailAddress
 }
 
@@ -94,7 +95,7 @@ func Getotp() string {
 	stdOutToken.Print("Please insert the code received on your phone: ")
 	input, err := reader.ReadString('\n')
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("error sanitizing input", err)
 		return ""
 	}
@@ -106,7 +107,7 @@ func Getotp() string {
 			stdOutToken.Print("Please insert the code received on your phone: ")
 			input, err = reader.ReadString('\n')
 			if err != nil {
-				Check(err)
+				inoutput.Check(err)
 				fmt.Println("error sanitizing input", err)
 				return "" // return if it isn't possible to read the input
 
@@ -121,6 +122,6 @@ func Getotp() string {
 		token = input
 	}
 
-	InfoLogs("Sucessfully received OTP token")
+	inoutput.InfoLogs("Sucessfully received OTP token")
 	return token
 }

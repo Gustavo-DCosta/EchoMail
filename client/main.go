@@ -7,7 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Gustavo-DCosta/EchoMail/client/services"
+	//	"github.com/Gustavo-DCosta/EchoMail/client/services/core"
+	"github.com/Gustavo-DCosta/EchoMail/client/services/core"
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
+	"github.com/Gustavo-DCosta/EchoMail/client/services/shared"
 	"github.com/joho/godotenv"
 )
 
@@ -16,13 +19,21 @@ func init() {
 	if err != nil {
 		// Log the error but don't exit. You might want to exit
 		// if your application can't run without these variables.
-		log.Println("Error loading .env file, continuing with existing environment variables.")
+		log.Fatal(`
+									Error loading .env file at path: ./config/.env
+									The app can't continue without it.
+									Please contact the support team to fix this issue.
+`)
 	}
 }
 
 func init() {
-	go services.Launcher()
-	go services.CacheEmailfromFile()
+	go core.Launcher()
+	go inoutput.CacheEmailfromFile()
+	// Function to get the email from the fail
+	// And cache it using cache function on cache package
+	// ENGLISH YES
+
 	const col = 50
 
 	for i := 0; i <= col; i++ {
@@ -35,12 +46,12 @@ func init() {
 
 	// Clear screen after animation
 	time.Sleep(200 * time.Millisecond)
-	services.ClearUI()
+	shared.ClearUI() //services.ClearUI() -> core.ClearUI()
 }
 
 func main() {
-	services.ClearUI()
-	services.CenterElement("[EchoMail]", false)
-	services.LockScreen()
-	services.LockScreenUX()
+	shared.ClearUI()                          //services.ClearUI() -> core.ClearUI()
+	shared.CenterElement("[EchoMail]", false) //services.CenterElement() -> core.CenterElement()
+	shared.HelpCommand()                      //lockscreen -> core.LockScreen()
+	core.LockScreenPrompt()                   // services.LockScreenUX() -> core.LockScreenUX()
 }

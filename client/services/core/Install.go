@@ -1,4 +1,4 @@
-package services
+package core
 
 import (
 	"encoding/json"
@@ -7,6 +7,8 @@ import (
 
 	"os"
 	"path/filepath"
+
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
 )
 
 type InstallState struct {
@@ -21,14 +23,17 @@ func Launcher() {
 
 func installationProcess() {
 	InstallationLogPath := "./log/installation.json"
-	if !areFoldersCreated() {
+	if err := areFoldersCreated(); err != nil {
+		inoutput.Check(err)
 		fmt.Println("Required folders were missing. Attempted to create them.")
+		return
 	}
 
 	if !checkInstallationFile(InstallationLogPath) {
 		file, err := os.Create(InstallationLogPath)
 
 		if err != nil {
+			inoutput.Check(err)
 			fmt.Println("Error creating installation file")
 		}
 		writeInstallationState(InstallationLogPath)
@@ -36,9 +41,8 @@ func installationProcess() {
 	}
 }
 
-func areFoldersCreated() bool {
+func areFoldersCreated() error {
 	folders := []string{"jwt", "session", "config", "log"}
-	allExist := true
 
 	for _, folder := range folders {
 		fullPath := filepath.Join(".", folder)
@@ -48,27 +52,23 @@ func areFoldersCreated() bool {
 			fmt.Printf("📁Folder missing: %s\n", fullPath)
 			err := os.MkdirAll(fullPath, 0755)
 			if err != nil {
-				Check(err)
-				fmt.Printf("Problem creating folder %s: %v\n", fullPath, err)
-				os.Exit(1)
+				inoutput.Check(err)
+				return fmt.Errorf("problem creating folder %s: %v", fullPath, err)
 			}
-			allExist = false
 		} else if err != nil {
-			fmt.Printf("Error accessing %s: %v\n", fullPath, err)
-			os.Exit(1)
+			inoutput.Check(err)
+			return fmt.Errorf("error accessing %s: %v", fullPath, err)
 		} else if !info.IsDir() {
-			fmt.Printf("Not a directory: %s\n", fullPath)
-			os.Exit(1)
+			return fmt.Errorf("not a directory: %s", fullPath)
 		}
 	}
-	return allExist
+	return nil
 }
 
 func checkInstallationFile(path string) bool { // We return if the file is there or not
 	var fileState bool
 	_, err := os.Stat(path)
 	if err == nil {
-		Check(err)
 		fileState = true
 	} else {
 		fileState = false
@@ -86,16 +86,15 @@ func writeInstallationState(path string) {
 
 	data, err := json.MarshalIndent(state, "", " ")
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("Err marshaling state", err)
 		return
 	}
 
 	err = os.WriteFile(path, data, 0644)
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("Err writing installation file", err)
 		return
 	}
-	InfoLogs("Sucessfully wrote version of the app")
 }

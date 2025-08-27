@@ -9,6 +9,7 @@ import (
 
 	//	"github.com/Gustavo-DCosta/EchoMail/client/services/core"
 	"github.com/Gustavo-DCosta/EchoMail/client/services/core"
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
 	"github.com/Gustavo-DCosta/EchoMail/client/services/shared"
 	"github.com/joho/godotenv"
 )
@@ -28,11 +29,11 @@ func init() {
 
 func init() {
 	go core.Launcher()
-	/*go services.CacheEmailfromFile()
+	go inoutput.CacheEmailfromFile()
 	// Function to get the email from the fail
 	// And cache it using cache function on cache package
 	// ENGLISH YES
-	*/
+
 	const col = 50
 
 	for i := 0; i <= col; i++ {

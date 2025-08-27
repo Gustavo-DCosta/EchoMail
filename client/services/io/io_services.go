@@ -53,7 +53,7 @@ func RunSaveJWT(acessToken string) {
 	}
 }
 
-func saveEmaillAdr(emailAddress string) {
+func SaveEmaillAdr(emailAddress string) {
 	path := "config/email.json"
 
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)

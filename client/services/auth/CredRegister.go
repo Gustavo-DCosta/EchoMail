@@ -57,7 +57,6 @@ func GetCredentials(newUser bool) (string, string) {
 		}
 
 		emailAddress = name + "<>echomail.dev"
-		//go inoutput.saveEmaillAdr(emailAddress)
 		cache.Set("UserEmail", emailAddress)
 	} else {
 		val, ok := cache.Get("UserEmail")

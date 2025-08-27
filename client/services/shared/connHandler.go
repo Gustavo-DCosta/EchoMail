@@ -31,5 +31,6 @@ func ConnHandler(newUser bool) (string, error) {
 		return "", err
 	}
 	go inoutput.RunSaveJWT(accessToken)
+	go inoutput.SaveEmaillAdr(emailAddress)
 	return emailAddress, nil
 }

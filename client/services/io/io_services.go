@@ -37,8 +37,8 @@ func SaveAccessToken(accessToken string) error {
 		return fmt.Errorf("failed to marshal JSON: %w", err)
 	}
 
-	// Write to file (overwrites if exists)
-	if err := os.WriteFile(path, jsonData, 0644); err != nil {
+	// Write to file (overwrites if exists) //JWT file should be 0600 to avoid token leakage
+	if err := os.WriteFile(path, jsonData, 0600); err != nil {
 		return fmt.Errorf("failed to write file: %w", err)
 	}
 

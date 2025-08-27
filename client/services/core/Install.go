@@ -23,13 +23,14 @@ func Launcher() {
 
 func installationProcess() {
 	InstallationLogPath := "./log/installation.json"
-	if !areFoldersCreated() {
+	if err := areFoldersCreated(); err != nil {
+		inoutput.Check(err)
 		fmt.Println("Required folders were missing. Attempted to create them.")
+		return
 	}
 
 	if !checkInstallationFile(InstallationLogPath) {
 		file, err := os.Create(InstallationLogPath)
-		inoutput.Check(err)
 
 		if err != nil {
 			inoutput.Check(err)
@@ -40,9 +41,8 @@ func installationProcess() {
 	}
 }
 
-func areFoldersCreated() bool {
+func areFoldersCreated() error {
 	folders := []string{"jwt", "session", "config", "log"}
-	allExist := true
 
 	for _, folder := range folders {
 		fullPath := filepath.Join(".", folder)
@@ -53,27 +53,22 @@ func areFoldersCreated() bool {
 			err := os.MkdirAll(fullPath, 0755)
 			if err != nil {
 				inoutput.Check(err)
-				fmt.Printf("Problem creating folder %s: %v\n", fullPath, err)
-				os.Exit(1)
+				return fmt.Errorf("problem creating folder %s: %v", fullPath, err)
 			}
-			allExist = false
 		} else if err != nil {
 			inoutput.Check(err)
-			fmt.Printf("Error accessing %s: %v\n", fullPath, err)
-			os.Exit(1)
+			return fmt.Errorf("error accessing %s: %v", fullPath, err)
 		} else if !info.IsDir() {
-			fmt.Printf("Not a directory: %s\n", fullPath)
-			os.Exit(1)
+			return fmt.Errorf("not a directory: %s", fullPath)
 		}
 	}
-	return allExist
+	return nil
 }
 
 func checkInstallationFile(path string) bool { // We return if the file is there or not
 	var fileState bool
 	_, err := os.Stat(path)
 	if err == nil {
-		inoutput.Check(err)
 		fileState = true
 	} else {
 		fileState = false

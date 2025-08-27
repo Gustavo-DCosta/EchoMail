@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/model"
 	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
@@ -41,12 +42,12 @@ func SendConnCredentials(phoneNumber, emaillAddress string, newUser bool) (strin
 
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
+	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
 		inoutput.Check(err)
 		fmt.Println("Couldn't send the http request | ERROR :", err)
-		return "", nil
+		return "", err // Accidentally returned nil instead of err lol
 	}
 
 	defer resp.Body.Close()

@@ -26,14 +26,14 @@ func LockScreenPrompt() {
 		case "login":
 			email, err := shared.ConnHandler(false)
 			if err != nil {
-				fmt.Println("An error hapened during login process")
+				fmt.Println("An error happened during login process")
 			} else {
 				AppUnlocked(email)
 			}
 		case "register":
 			email, err := shared.ConnHandler(true)
 			if err != nil {
-				fmt.Println("An error hapened during register process")
+				fmt.Println("An error happened during register process")
 			} else {
 				AppUnlocked(email)
 			}

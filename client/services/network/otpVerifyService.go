@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/model"
 	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
@@ -39,7 +40,7 @@ func SendOtp(uuid, token string) (string, error) {
 
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
+	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
 		inoutput.Check(err)

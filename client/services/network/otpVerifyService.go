@@ -1,4 +1,4 @@
-package services
+package network
 
 import (
 	"bytes"
@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/model"
+	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
 )
 
 func SendOtp(uuid, token string) (string, error) {
@@ -24,14 +25,14 @@ func SendOtp(uuid, token string) (string, error) {
 
 	reqPayload, err := json.Marshal(payloadStruct)
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("Couldn't marshal the payload | ERROR :", err)
 		return "", err
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(reqPayload))
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("Error creating HTTP request:", err)
 		return "", err
 	}
@@ -41,23 +42,23 @@ func SendOtp(uuid, token string) (string, error) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		fmt.Println("Error sending the request:", err)
 		return "", err // Return the actual error
 	}
 	defer resp.Body.Close()
-	InfoLogs("Sent an http request to the server")
+	inoutput.InfoLogs("Sent an http request to the server")
 
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("unexpected HTTP status: %d %s", resp.StatusCode, resp.Status)
 	}
 
 	var serverResponse model.VerifySupabaseResponse // removed debug message, UX upgrade
-	InfoLogs("Rceived response from the server")
+	inoutput.InfoLogs("Rceived response from the server")
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		Check(err)
+		inoutput.Check(err)
 		return "", err
 	}
 

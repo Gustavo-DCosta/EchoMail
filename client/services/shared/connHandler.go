@@ -9,17 +9,17 @@ import (
 	"github.com/Gustavo-DCosta/EchoMail/client/services/network"
 )
 
-func ConnHandler(newUser bool) error {
+func ConnHandler(newUser bool) (string, error) {
 	phoneNumber, emailAddress := auth.GetCredentials(newUser)
 	if phoneNumber == "" || emailAddress == "" {
-		return fmt.Errorf("The input fields are empty!")
+		return "", fmt.Errorf("The input fields are empty!")
 	}
 
 	uuid, err := network.SendConnCredentials(phoneNumber, emailAddress, newUser)
 	if err != nil {
 		fmt.Println("an error occured, please try again", err)
 		inoutput.Check(err)
-		return err
+		return "", err
 	}
 
 	go inoutput.RunSaveUUID(uuid)
@@ -28,9 +28,8 @@ func ConnHandler(newUser bool) error {
 	if err != nil {
 		fmt.Println("an error occured, please try again", err)
 		inoutput.Check(err)
-		return err
+		return "", err
 	}
 	go inoutput.RunSaveJWT(accessToken)
-
-	return nil
+	return emailAddress, nil
 }

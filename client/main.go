@@ -51,6 +51,6 @@ func init() {
 func main() {
 	shared.ClearUI()                          //services.ClearUI() -> core.ClearUI()
 	shared.CenterElement("[EchoMail]", false) //services.CenterElement() -> core.CenterElement()
-	//shared.LockScreen()                       //lockscreen -> core.LockScreen()
-	core.LockScreenPrompt() // services.LockScreenUX() -> core.LockScreenUX()
+	shared.HelpCommand()                      //lockscreen -> core.LockScreen()
+	core.LockScreenPrompt()                   // services.LockScreenUX() -> core.LockScreenUX()
 }

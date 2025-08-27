@@ -24,9 +24,19 @@ func LockScreenPrompt() {
 
 		switch input {
 		case "login":
-			shared.ConnHandler(false)
+			email, err := shared.ConnHandler(false)
+			if err != nil {
+				fmt.Println("An error hapened during login process")
+			} else {
+				AppUnlocked(email)
+			}
 		case "register":
-			shared.ConnHandler(true)
+			email, err := shared.ConnHandler(true)
+			if err != nil {
+				fmt.Println("An error hapened during register process")
+			} else {
+				AppUnlocked(email)
+			}
 		case "exit":
 			fmt.Println("command to exit")
 			os.Exit(0)

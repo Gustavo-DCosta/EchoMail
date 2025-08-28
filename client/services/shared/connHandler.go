@@ -30,6 +30,7 @@ func ConnHandler(newUser bool) (string, error) {
 		inoutput.Check(err)
 		return "", err
 	}
+
 	go inoutput.RunSaveJWT(accessToken)
 	go inoutput.SaveEmaillAdr(emailAddress)
 	return emailAddress, nil

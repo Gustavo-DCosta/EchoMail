@@ -179,7 +179,7 @@ func InfoLogs(message string) {
 
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		fmt.Println("Failed to open the file |ERROR|", err)
+		fmt.Println("Failed to open the log file |ERROR|", err)
 		return
 	}
 	defer file.Close()
@@ -195,4 +195,28 @@ func InfoLogs(message string) {
 	if err := encoder.Encode(entry); err != nil {
 		fmt.Println("Failed to decode the message |ERROR|", err)
 	}
+}
+
+func SaveSession(emailAdress, phoneNumber string) error {
+	path := "session/session.json"
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0600)
+	if err != nil {
+		fmt.Println("Failed to open session file |ERROR|", err)
+	}
+	defer file.Close()
+
+	entry := model.SessionObject{
+		StructEmail:       emailAdress,
+		StructPhoneNumber: phoneNumber,
+		StructTimePrompt:  time.Now(),
+	}
+
+	encoder := json.NewEncoder(file)
+	encoder.SetEscapeHTML(false)
+
+	if err := encoder.Encode(entry); err != nil {
+		fmt.Println("Failed to decode the message |ERROR|", err)
+	}
+
+	return nil
 }

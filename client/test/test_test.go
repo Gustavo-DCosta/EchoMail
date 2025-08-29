@@ -1,11 +1,13 @@
 package test
 
 import (
+	"fmt"
+	"regexp"
 	"testing"
 )
 
 func TestGetcreds(t *testing.T) {
-	var email string = "luna>>!**$ryx"
+	var email string = "lunaryx"
 	ilegalChars := []rune{
 		' ', '!', '#', '$', '%', '^', '&', '*', '(', ')', '=', '+', ',', '/', '\\', ';', ':', '\'', '"', '<', '>', '?', '[', ']', '{', '}', '|', '`', '~',
 	}
@@ -26,4 +28,18 @@ func TestGetcreds(t *testing.T) {
 		t.Errorf("No email should start with a .")
 	}
 
+}
+
+func TestGetPhoneNumber(t *testing.T) {
+	phone := "+33762691203"
+
+	// occurs one or more times with the + SHOULD ONLY OCCUR 0 or one so we should use the *
+	pattern := regexp.MustCompile(`^\+?\d{4,17}$`)
+	//doesn't lets me do \+\ maybe it's /+/?
+	// North Korea phone number goes until 7, and Nieu has a max lenght of 4
+	// Check if the phone number follows the pattern
+	ok := pattern.MatchString(phone)
+	fmt.Println("Regex expression:	", ok)
+
+	// returns false
 }

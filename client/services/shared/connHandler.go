@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/services/auth"
-	//"github.com/Gustavo-DCosta/EchoMail/client/services/core"
 	inoutput "github.com/Gustavo-DCosta/EchoMail/client/services/io"
 	"github.com/Gustavo-DCosta/EchoMail/client/services/network"
 )
@@ -12,7 +11,7 @@ import (
 func ConnHandler(newUser bool) (string, error) {
 	phoneNumber, emailAddress := auth.GetCredentials(newUser)
 	if phoneNumber == "" || emailAddress == "" {
-		return "", fmt.Errorf("The input fields are empty!")
+		return "", fmt.Errorf("the input fields are empty") // Removed the capitalized letters and ! at the end
 	}
 
 	uuid, err := network.SendConnCredentials(phoneNumber, emailAddress, newUser)

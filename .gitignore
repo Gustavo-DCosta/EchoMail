@@ -4,6 +4,7 @@ client/session/
 client/log/
 client/config/
 
+.vscode
 server/
 env
 otp.sh

@@ -19,6 +19,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/Gustavo-DCosta/EchoMail/client/cache"
@@ -66,16 +67,20 @@ func GetCredentials(newUser bool) (string, string) {
 		}
 		emailAddress = val
 	}
-
+	phoneNumberPattern := `^\+?\d{4,17}$`
+	pattern := regexp.MustCompile(phoneNumberPattern)
 	var phoneNumber string
+
 	for {
 		stdOutCred.Print("Phone number (include country code): ")
 		input, _ := reader.ReadString('\n')
 		phoneNumber = strings.TrimSpace(input)
-		if phoneNumber != "" {
+
+		if pattern.MatchString(phoneNumber) {
 			break
+		} else {
+			stdErr.Println("Phone Number not accepted, please try again")
 		}
-		stdErr.Println("Please insert a phone number.")
 	}
 
 	inoutput.InfoLogs("Successfully received credentials")
@@ -109,7 +114,6 @@ func Getotp() string {
 				inoutput.Check(err)
 				fmt.Println("error sanitizing input", err)
 				return "" // return if it isn't possible to read the input
-
 			}
 			input = strings.TrimSpace(input)
 			if len(input) == max {
